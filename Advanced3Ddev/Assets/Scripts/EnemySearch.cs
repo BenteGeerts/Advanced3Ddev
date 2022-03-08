@@ -7,6 +7,7 @@ public class EnemySearch : MonoBehaviour
     public float speed;
     public Vector3 direction;
     public Transform seekTarget;
+    public float stoppingDistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class EnemySearch : MonoBehaviour
     void Update()
     {
         Vector3 newDirection = seekTarget.position - transform.position;
-        newDirection = new Vector3(newDirection.x, 0, newDirection.z);
+        newDirection = new Vector3(newDirection.x + stoppingDistance, 0, newDirection.z);
         newDirection = newDirection.normalized;
         direction = newDirection;
         transform.position += speed * direction * Time.deltaTime;
