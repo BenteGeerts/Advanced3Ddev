@@ -24,7 +24,6 @@ public class EnemyManager : MonoBehaviour
             wanderComponent = wanderComponent.gameObject.GetComponent<EnemyIdle>();
             seekComponent = seekComponent.gameObject.GetComponent<EnemySearch>();
         }
-        // Update is called once per frame
         void Update()
         {
             switch (state)
@@ -55,4 +54,5 @@ public class EnemyManager : MonoBehaviour
                     }
             }
         }
-    }
+
+}
