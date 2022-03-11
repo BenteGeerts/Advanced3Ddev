@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class EnemyIdle : MonoBehaviour
 {
-    public float speed;
-    public Vector3 direction;
-    // Start is called before the first frame update
+
+    //adjust this to change speed
+    public float speed = 5f;
+    //adjust this to change how high it goes
+    public float height = 0.5f;
+    Vector3 pos;
+
     void Start()
     {
-
+        pos = transform.position;
     }
-    // Update is called once per frame
     void Update()
     {
-        transform.position += speed * direction * Time.deltaTime;
+        //get the objects current position and put it in a variable so we can access it later with less code
+       
+        //calculate what the new Y position will be
+        float newY = Mathf.Sin(Time.time * speed);
+        //set the object's Y to the new calculated Y
+        transform.position = new Vector3(pos.x, newY*height, pos.z);
     }
 }
