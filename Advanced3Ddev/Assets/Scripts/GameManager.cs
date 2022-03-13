@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance() { return instance; }
     int score = 0;
     [SerializeField] TextMeshProUGUI scoreUI;
-    // Start is called before the first frame update
+    public bool running = false;
+
+
     void Start()
     {
         instance = this;
