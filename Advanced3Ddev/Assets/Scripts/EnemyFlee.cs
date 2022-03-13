@@ -16,18 +16,13 @@ public class EnemyFlee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, seekTarget.position) <
-fleeDistance)
-        {
-            Vector3 newDirection = transform.position - seekTarget.position;
-            newDirection = new Vector3(newDirection.x, 0, newDirection.z);
-            newDirection = newDirection.normalized;
-            direction = newDirection;
-        }
-        else
-        {
-            direction = Vector3.zero;
-        }
+       
+        Vector3 newDirection = transform.position - seekTarget.position;
+        newDirection = new Vector3(newDirection.x, 0, newDirection.z);
+        newDirection = newDirection.normalized;
+        direction = newDirection;
+
+     
         transform.position += speed * direction * Time.deltaTime;
     }
 }

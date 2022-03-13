@@ -43443,10 +43443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1135e374f5d83e24c81762d2494b7031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   direction: {x: 0, y: 0, z: 0}
   seekTarget: {fileID: 1496671668}
-  stoppingDistance: 0
+  stoppingDistance: 1
 --- !u!114 &941979964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43473,10 +43473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10220283ab7cf3245b2a5b36210809c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 6
   direction: {x: 0, y: 0, z: 0}
   seekTarget: {fileID: 1496671668}
-  fleeDistance: 5
+  fleeDistance: 30
 --- !u!114 &941979966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43490,10 +43490,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1496671668}
-  fleeDistance: 20
+  distance: 30
   fleeComponent: {fileID: 941979965}
-  seekComponent: {fileID: 941979963}
-  wanderComponent: {fileID: 941979964}
+  searchComponent: {fileID: 941979963}
+  idleComponent: {fileID: 941979964}
 --- !u!195 &941979968
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -84850,7 +84850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207293392497186, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 292.2
+      value: 334.72
       objectReference: {fileID: 0}
     - target: {fileID: 4207293392497186, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.y
