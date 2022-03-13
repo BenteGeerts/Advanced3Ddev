@@ -7,6 +7,7 @@ public class PaueMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject fps;
+    public GameObject UI;
     void Start()
     {
         
@@ -32,6 +33,7 @@ public class PaueMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pauseMenuUI.SetActive(false);
+        UI.SetActive(true);
         fps.SetActive(true);
         Time.timeScale = 1.0f;
         GameIsPaused = false;
@@ -42,6 +44,7 @@ public class PaueMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
+        UI.SetActive(false);
         fps.SetActive(false);
         Time.timeScale = 0f;
         GameIsPaused = true;

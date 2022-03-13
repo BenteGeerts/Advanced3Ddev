@@ -53,6 +53,20 @@ public class EnemyManager : MonoBehaviour
                         break;
                     }
             }
+
+            if (GameManager.GetInstance().running == true)
+            {
+                Debug.Log("I am scared........");
+                StartCoroutine(wait10Seconds());
+                GameManager.GetInstance().running = false;
+            }
+
+            IEnumerator wait10Seconds()
+            {
+                Debug.Log("Started Coroutine at timestamp : " + Time.time);
+                yield return new WaitForSeconds(10);
+                Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+            }
         }
 
 }

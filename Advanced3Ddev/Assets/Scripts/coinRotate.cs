@@ -24,4 +24,9 @@ public class coinRotate : MonoBehaviour
         transform.Rotate(0, 0, spinSpeed * Time.deltaTime);
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameManager.GetInstance().AddPoint();
+    }
 }
