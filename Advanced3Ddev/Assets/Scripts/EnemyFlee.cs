@@ -7,7 +7,6 @@ public class EnemyFlee : MonoBehaviour
     public float speed;
     public Vector3 direction;
     public Transform seekTarget;
-    public float fleeDistance = 5;
     // Start is called before the first frame update
     void Start()
     {
