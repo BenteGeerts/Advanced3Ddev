@@ -17,6 +17,7 @@ public class EnemyManagerOne : MonoBehaviour
     public EnemySearch searchComponent;
     public EnemyIdle idleComponent;
     public float countDownTime;
+    float time = 10f;
     void Start()
     {
         fleeComponent.enabled = false;
@@ -38,7 +39,7 @@ public class EnemyManagerOne : MonoBehaviour
                         Search();
                     }
 
-                    if(GameManager.GetInstance().running)
+                    if(GameManager.GetInstance().one)
                     {
                         Flee();
                     }
@@ -46,8 +47,15 @@ public class EnemyManagerOne : MonoBehaviour
                 }
             case EnemyState.Flee:
                 {
-                    StartCoroutine(CountDownStart());
-                    break;
+                    //StartCoroutine(CountDownStart());
+                    time = time - Time.deltaTime;
+                    Debug.Log(time);
+                    if (time < 0f)
+                    {
+                        time = 10f;
+                        Idle();
+                    }
+                        break;
                 }
             case EnemyState.Search:
                 {
@@ -55,7 +63,7 @@ public class EnemyManagerOne : MonoBehaviour
                     {
                         Idle();
                     }
-                    if (GameManager.GetInstance().running)
+                    if (GameManager.GetInstance().one)
                     {
                         Flee();
                     }
@@ -69,7 +77,8 @@ public class EnemyManagerOne : MonoBehaviour
             fleeComponent.enabled = false;
             idleComponent.enabled = true;
             searchComponent.enabled = false;
-         }
+            GameManager.GetInstance().one = false;
+        }
         void Flee()
         {
             Debug.Log("switching to flee");
@@ -77,7 +86,7 @@ public class EnemyManagerOne : MonoBehaviour
             fleeComponent.enabled = true;
             idleComponent.enabled = false;
             searchComponent.enabled = false;
-            GameManager.GetInstance().running = false;
+            GameManager.GetInstance().one = false;
         }
 
         void Search()
@@ -87,6 +96,7 @@ public class EnemyManagerOne : MonoBehaviour
             fleeComponent.enabled = false;
             idleComponent.enabled = false;
             searchComponent.enabled = true;
+            GameManager.GetInstance().one = false;
         }
 
         IEnumerator CountDownStart()

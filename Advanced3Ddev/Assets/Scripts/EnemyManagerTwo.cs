@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class EnemyManagerTwo : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class EnemyManagerTwo : MonoBehaviour
     public EnemySearch searchComponent;
     public EnemyIdle idleComponent;
     public float countDownTime;
+    float time = 10;
     void Start()
     {
         fleeComponent.enabled = true;
@@ -33,7 +35,14 @@ public class EnemyManagerTwo : MonoBehaviour
         {
             case EnemyState.Idle:
                 {
-                    StartCoroutine(CountDownStart());
+                    //StartCoroutine(CountDownStarts());
+                    time = time - Time.deltaTime;
+                    Debug.Log(time);
+                    if(time < 0f)
+                    {
+                        time = 10f;
+                        Search();
+                    }
                     break;
                 }
             case EnemyState.Flee:
@@ -42,7 +51,7 @@ public class EnemyManagerTwo : MonoBehaviour
                     {
                         Search();
                     }
-                    if(GameManager.GetInstance().running)
+                    if(GameManager.GetInstance().two)
                     {
                         Idle();
                     }
@@ -50,7 +59,7 @@ public class EnemyManagerTwo : MonoBehaviour
                 }
             case EnemyState.Search:
                 {
-                    if(GameManager.GetInstance().running)
+                    if(GameManager.GetInstance().two)
                     {
                         Idle();
                     }
@@ -68,7 +77,8 @@ public class EnemyManagerTwo : MonoBehaviour
             fleeComponent.enabled = false;
             idleComponent.enabled = true;
             searchComponent.enabled = false;
-         }
+            GameManager.GetInstance().two = false;
+        }
         void Flee()
         {
             Debug.Log("switching to flee");
@@ -76,7 +86,7 @@ public class EnemyManagerTwo : MonoBehaviour
             fleeComponent.enabled = true;
             idleComponent.enabled = false;
             searchComponent.enabled = false;
-            GameManager.GetInstance().running = false;
+            GameManager.GetInstance().two = false;
         }
 
         void Search()
@@ -86,21 +96,23 @@ public class EnemyManagerTwo : MonoBehaviour
             fleeComponent.enabled = false;
             idleComponent.enabled = false;
             searchComponent.enabled = true;
+            GameManager.GetInstance().two = false;
         }
 
-        IEnumerator CountDownStart()
-        {
-            while(countDownTime > 0)
+      
+            IEnumerator CountDownStarts()
             {
-                yield return new WaitForSeconds(1f);
-                countDownTime = countDownTime - Time.deltaTime;
-                Debug.Log(countDownTime);
-            }
+                while (countDownTime > 0)
+                {
+                    yield return new WaitForSeconds(1f);
+                    countDownTime = countDownTime - Time.deltaTime;
+                    Debug.Log(countDownTime);
+                }
 
-            yield return new WaitForSeconds(1f);
-            countDownTime = 10;
-            Search();
-        }
+                yield return new WaitForSeconds(1f);
+                countDownTime = 10;
+                Search();
+            }
 
     }
 }

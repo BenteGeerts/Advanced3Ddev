@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance() { return instance; }
     int score = 0;
     [SerializeField] TextMeshProUGUI scoreUI;
-    public bool running = false;
-
+    public bool one = false;
+    public bool two = false;
+    public bool three = false;
 
     void Start()
     {

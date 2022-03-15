@@ -1013,6 +1013,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: chair1 (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 1844930292423774, guid: 991e8973513e2ad408232c1afeb3a9df, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4558593196022300, guid: 991e8973513e2ad408232c1afeb3a9df, type: 3}
       propertyPath: m_RootOrder
       value: 54
@@ -3178,7 +3182,12 @@ PrefabInstance:
     - target: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991,
         type: 3}
       propertyPath: m_Name
-      value: Ghost_Orange Variant
+      value: 3(yellow)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163715946089988518, guid: bbf054d6e436c51468be981115a84991,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbf054d6e436c51468be981115a84991, type: 3}
@@ -38566,7 +38575,7 @@ PrefabInstance:
     - target: {fileID: 722881024703374693, guid: f4c0092c8046f484a80394f3f076d9d7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.78
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: 722881024703374693, guid: f4c0092c8046f484a80394f3f076d9d7,
         type: 3}
@@ -38576,7 +38585,7 @@ PrefabInstance:
     - target: {fileID: 722881024703374693, guid: f4c0092c8046f484a80394f3f076d9d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.58
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 722881024703374693, guid: f4c0092c8046f484a80394f3f076d9d7,
         type: 3}
@@ -38616,7 +38625,7 @@ PrefabInstance:
     - target: {fileID: 722881024703805765, guid: f4c0092c8046f484a80394f3f076d9d7,
         type: 3}
       propertyPath: m_Name
-      value: Ghost_Pink Variant
+      value: 2(pink)
       objectReference: {fileID: 0}
     - target: {fileID: 722881024703805765, guid: f4c0092c8046f484a80394f3f076d9d7,
         type: 3}
@@ -59033,12 +59042,12 @@ PrefabInstance:
     - target: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c,
         type: 3}
       propertyPath: m_Name
-      value: Ghost_LitBlue Variant
+      value: 1(blue)
       objectReference: {fileID: 0}
     - target: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6706788707963542953, guid: 41f5bb0172a94a4459eee9900b6bf02c,
         type: 3}
@@ -89088,7 +89097,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreUI: {fileID: 223974228}
-  running: 0
+  one: 0
+  two: 0
+  three: 0
 --- !u!4 &2052696986
 Transform:
   m_ObjectHideFlags: 0
