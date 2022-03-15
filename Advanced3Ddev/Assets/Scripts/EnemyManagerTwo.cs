@@ -19,10 +19,10 @@ public class EnemyManagerTwo : MonoBehaviour
     public float countDownTime;
     void Start()
     {
-        fleeComponent.enabled = false;
+        fleeComponent.enabled = true;
         idleComponent.enabled = false;
-        searchComponent.enabled = true;
-        state = EnemyState.Search;
+        searchComponent.enabled = false;
+        state = EnemyState.Flee;
         fleeComponent = fleeComponent.gameObject.GetComponent<EnemyFlee>();
         idleComponent = idleComponent.gameObject.GetComponent<EnemyIdle>();
         searchComponent = searchComponent.gameObject.GetComponent<EnemySearch>();
@@ -33,29 +33,28 @@ public class EnemyManagerTwo : MonoBehaviour
         {
             case EnemyState.Idle:
                 {
-                    if (Vector3.Distance(transform.position, target.position) < distance)
-                    {
-                        Search();
-                    }
-
-                    if(GameManager.GetInstance().running)
-                    {
-                        Flee();
-                    }
+                    StartCoroutine(CountDownStart());
                     break;
                 }
             case EnemyState.Flee:
                 {
-                    StartCoroutine(CountDownStart());
+                    if(Vector3.Distance(transform.position, target.position) < distance)
+                    {
+                        Search();
+                    }
+                    if(GameManager.GetInstance().running)
+                    {
+                        Idle();
+                    }
                     break;
                 }
             case EnemyState.Search:
                 {
-                    if(Vector3.Distance(transform.position, target.position) > distance)
+                    if(GameManager.GetInstance().running)
                     {
                         Idle();
                     }
-                    if (GameManager.GetInstance().running)
+                    if(Vector3.Distance(transform.position, target.position)> distance)
                     {
                         Flee();
                     }
@@ -100,7 +99,7 @@ public class EnemyManagerTwo : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             countDownTime = 10;
-            Idle();
+            Search();
         }
 
     }

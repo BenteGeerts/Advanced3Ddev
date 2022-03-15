@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManagerThee : MonoBehaviour
+public class EnemyManagerThree : MonoBehaviour
 {
     public enum EnemyState
     {
@@ -20,9 +20,9 @@ public class EnemyManagerThee : MonoBehaviour
     void Start()
     {
         fleeComponent.enabled = false;
-        idleComponent.enabled = false;
-        searchComponent.enabled = true;
-        state = EnemyState.Search;
+        idleComponent.enabled = true;
+        searchComponent.enabled = false;
+        state = EnemyState.Idle;
         fleeComponent = fleeComponent.gameObject.GetComponent<EnemyFlee>();
         idleComponent = idleComponent.gameObject.GetComponent<EnemyIdle>();
         searchComponent = searchComponent.gameObject.GetComponent<EnemySearch>();
@@ -33,32 +33,31 @@ public class EnemyManagerThee : MonoBehaviour
         {
             case EnemyState.Idle:
                 {
-                    if (Vector3.Distance(transform.position, target.position) < distance)
-                    {
-                        Search();
-                    }
-
-                    if(GameManager.GetInstance().running)
+                    if(Vector3.Distance(transform.position, target.position) < distance)
                     {
                         Flee();
+                    }
+                    if(GameManager.GetInstance().running)
+                    {
+                        Search();
                     }
                     break;
                 }
             case EnemyState.Flee:
                 {
-                    StartCoroutine(CountDownStart());
-                    break;
-                }
-            case EnemyState.Search:
-                {
                     if(Vector3.Distance(transform.position, target.position) > distance)
                     {
                         Idle();
                     }
-                    if (GameManager.GetInstance().running)
+                    if(GameManager.GetInstance().running)
                     {
-                        Flee();
+                        Search();
                     }
+                    break;
+                }
+            case EnemyState.Search:
+                {
+                    StartCoroutine(CountDownStart());                  
                     break;
                 }
         }
@@ -100,7 +99,7 @@ public class EnemyManagerThee : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             countDownTime = 10;
-            Idle();
+            Flee();
         }
 
     }
