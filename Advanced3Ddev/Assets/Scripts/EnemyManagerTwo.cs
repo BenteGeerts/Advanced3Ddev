@@ -115,4 +115,13 @@ public class EnemyManagerTwo : MonoBehaviour
             }
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collider entered");
+        if (state == EnemyState.Idle)
+        {
+            GameManager.GetInstance().AddGhost();
+            Destroy(gameObject);
+        }
+    }
 }

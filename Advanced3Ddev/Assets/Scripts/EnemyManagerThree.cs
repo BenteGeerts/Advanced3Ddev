@@ -98,4 +98,13 @@ public class EnemyManagerThree : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collider entered");
+        if (state == EnemyState.Search)
+        {
+            GameManager.GetInstance().AddGhost();
+            Destroy(gameObject);
+        }
+    }
 }

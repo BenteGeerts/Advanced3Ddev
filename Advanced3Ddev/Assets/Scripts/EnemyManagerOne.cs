@@ -114,4 +114,14 @@ public class EnemyManagerOne : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collider entered");
+        if(state == EnemyState.Flee)
+        {
+            GameManager.GetInstance().AddGhost();
+            Destroy(gameObject);
+        }
+    }
 }
