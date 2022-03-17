@@ -18,6 +18,8 @@ public class EnemyManagerThree : MonoBehaviour
     public EnemyIdle idleComponent;
     public float countDownTime;
     float time = 10f;
+    float lastAttackTime = 0;
+    float attackCoolDown = 2;
     void Start()
     {
         fleeComponent.enabled = false;
@@ -105,6 +107,17 @@ public class EnemyManagerThree : MonoBehaviour
         {
             GameManager.GetInstance().AddGhost();
             Destroy(gameObject);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (Time.time - lastAttackTime >= attackCoolDown)
+        {
+            lastAttackTime = Time.time;
+            if (state == EnemyState.Flee || state == EnemyState.Idle)
+            {
+                GameManager.GetInstance().LoseHealth();
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ public class EnemyManagerTwo : MonoBehaviour
     public EnemyIdle idleComponent;
     public float countDownTime;
     float time = 10;
+    float lastAttackTime = 0;
+    float attackCoolDown = 2;
     void Start()
     {
         fleeComponent.enabled = true;
@@ -122,6 +124,17 @@ public class EnemyManagerTwo : MonoBehaviour
         {
             GameManager.GetInstance().AddGhost();
             Destroy(gameObject);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (Time.time - lastAttackTime >= attackCoolDown)
+        {
+            lastAttackTime = Time.time;
+            if (state == EnemyState.Flee || state == EnemyState.Search)
+            {
+                GameManager.GetInstance().LoseHealth();
+            }
         }
     }
 }

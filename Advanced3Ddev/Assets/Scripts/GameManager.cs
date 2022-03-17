@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance() { return instance; }
     int score = 0;
     int ghosts = 0;
+    int health = 100;
     [SerializeField] TextMeshProUGUI scoreUI;
     [SerializeField] TextMeshProUGUI ghostsUI;
+    [SerializeField] TextMeshProUGUI healthUI;
     public bool one = false;
     public bool two = false;
     public bool three = false;
@@ -21,25 +24,37 @@ public class GameManager : MonoBehaviour
         instance = this;
         score = 0;
         ghosts = 0;
+        healthUI.text = 100.ToString();
     }
     // Update is called once per frame
-    void UpdateScore()
+    void UpdateUI()
     {
         scoreUI.text = "Score: " + score;
-    }
-    void UpdateGhosts()
-    {
         ghostsUI.text = "Ghosts killed: " + ghosts;
+        healthUI.text = health.ToString();
     }
     public void AddPoint()
     {
         score++;
-        UpdateScore();
+        UpdateUI();
     }
     public void AddGhost()
     {
         ghosts++;
-        UpdateGhosts();
+        UpdateUI();
+    }
+    public void LoseHealth()
+    {
+        if(health >= 10)
+        {
+            health = health - 10;
+            UpdateUI();
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+       
     }
 
     public int Score
@@ -49,5 +64,9 @@ public class GameManager : MonoBehaviour
     public int Ghosts
     {
         get { return ghosts; }
+    }
+    public int Health
+    {
+        get { return health; }
     }
 }
