@@ -16,13 +16,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreUI;
     [SerializeField] TextMeshProUGUI ghostsUI;
     [SerializeField] TextMeshProUGUI healthUI;
+    [SerializeField] TextMeshProUGUI ghostsLeftUI;
+    [SerializeField] TextMeshProUGUI highScoreUI;
     public bool candyTaken = false;
     void Start()
     {
         instance = this;
         score = 0;
         ghosts = 0;
+        ghostsLeft = 3;
         healthUI.text = 100.ToString();
+        UpdateUI();
     }
     // Update is called once per frame
     void UpdateUI()
@@ -30,10 +34,16 @@ public class GameManager : MonoBehaviour
         scoreUI.text = "Score: " + score;
         ghostsUI.text = "Ghosts killed: " + ghosts;
         healthUI.text = health.ToString();
+        ghostsLeftUI.text = "Ghosts left: " + ghostsLeft;
+        highScoreUI.text = "Highscore: " + PlayerPrefs.GetInt("highScore").ToString();
     }
     public void AddPoint()
     {
         score++;
+        if(score > PlayerPrefs.GetInt("highScore"))
+        {
+            PlayerPrefs.SetInt("highScore", score);
+        }
         UpdateUI();
     }
     public void AddGhost()
@@ -72,5 +82,6 @@ public class GameManager : MonoBehaviour
     public int GhostsLeft
     {
         get { return ghostsLeft; }
+        set { ghostsLeft = value; }
     }
 }

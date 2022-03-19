@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class ghostSpawn : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject blue;
+    public GameObject pink;
+    public GameObject yellow;
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(GameManager.GetInstance().GhostsLeft == 2)
+        {
+            Instantiate(blue, transform.position, Quaternion.identity);
+            Instantiate(pink, transform.position, Quaternion.identity);
+            Instantiate(yellow, transform.position, Quaternion.identity);
+            GameManager.GetInstance().GhostsLeft += 3;
+        }
     }
 }

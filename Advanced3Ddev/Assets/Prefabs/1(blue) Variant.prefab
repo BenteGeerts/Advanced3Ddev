@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c,
         type: 3}
       propertyPath: m_Name
-      value: 1(blue)
+      value: 1(blue) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6706788707963437449, guid: 41f5bb0172a94a4459eee9900b6bf02c,
         type: 3}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1135e374f5d83e24c81762d2494b7031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 7
   direction: {x: 0, y: 0, z: 0}
   stoppingDistance: 1
 --- !u!114 &941979964
