@@ -28,5 +28,6 @@ public class runCandy : MonoBehaviour
         GameManager.GetInstance().one = false;
         GameManager.GetInstance().two = false;
         GameManager.GetInstance().three = false;
+        Destroy(gameObject);
     }
 }

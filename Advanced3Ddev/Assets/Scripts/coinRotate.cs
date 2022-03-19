@@ -28,5 +28,6 @@ public class coinRotate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameManager.GetInstance().AddPoint();
+        Destroy(gameObject);
     }
 }
