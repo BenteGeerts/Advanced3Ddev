@@ -11,7 +11,7 @@ public class EnemyManagerOne : MonoBehaviour
         Search,
     }
     EnemyState state;
-    public Transform target;
+    public GameObject target;
     public float distance = 20;
     public EnemyFlee fleeComponent;
     public EnemySearch searchComponent;
@@ -22,6 +22,7 @@ public class EnemyManagerOne : MonoBehaviour
     float attackCoolDown = 2;
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player");
         fleeComponent.enabled = false;
         idleComponent.enabled = false;
         searchComponent.enabled = true;
@@ -36,12 +37,12 @@ public class EnemyManagerOne : MonoBehaviour
         {
             case EnemyState.Idle:
                 {
-                    if (Vector3.Distance(transform.position, target.position) < distance)
+                    if (Vector3.Distance(transform.position, target.transform.position) < distance)
                     {
                         Search();
                     }
 
-                    if(GameManager.GetInstance().one)
+                    if(GameManager.GetInstance().candyTaken)
                     {
                         Flee();
                     }
@@ -49,7 +50,6 @@ public class EnemyManagerOne : MonoBehaviour
                 }
             case EnemyState.Flee:
                 {
-                    //StartCoroutine(CountDownStart());
                     time = time - Time.deltaTime;
                     Debug.Log(time);
                     if (time < 0f)
@@ -61,11 +61,11 @@ public class EnemyManagerOne : MonoBehaviour
                 }
             case EnemyState.Search:
                 {
-                    if(Vector3.Distance(transform.position, target.position) > distance)
+                    if(Vector3.Distance(transform.position, target.transform.position) > distance)
                     {
                         Idle();
                     }
-                    if (GameManager.GetInstance().one)
+                    if (GameManager.GetInstance().candyTaken)
                     {
                         Flee();
                     }
@@ -79,7 +79,6 @@ public class EnemyManagerOne : MonoBehaviour
             fleeComponent.enabled = false;
             idleComponent.enabled = true;
             searchComponent.enabled = false;
-            GameManager.GetInstance().one = false;
         }
         void Flee()
         {
@@ -88,7 +87,6 @@ public class EnemyManagerOne : MonoBehaviour
             fleeComponent.enabled = true;
             idleComponent.enabled = false;
             searchComponent.enabled = false;
-            GameManager.GetInstance().one = false;
         }
 
         void Search()
@@ -98,21 +96,6 @@ public class EnemyManagerOne : MonoBehaviour
             fleeComponent.enabled = false;
             idleComponent.enabled = false;
             searchComponent.enabled = true;
-            GameManager.GetInstance().one = false;
-        }
-
-        IEnumerator CountDownStart()
-        {
-            while(countDownTime > 0)
-            {
-                yield return new WaitForSeconds(1f);
-                countDownTime = countDownTime - Time.deltaTime;
-                Debug.Log(countDownTime);
-            }
-
-            yield return new WaitForSeconds(1f);
-            countDownTime = 10;
-            Idle();
         }
 
     }

@@ -16,10 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreUI;
     [SerializeField] TextMeshProUGUI ghostsUI;
     [SerializeField] TextMeshProUGUI healthUI;
-    public bool one = false;
-    public bool two = false;
-    public bool three = false;
-
+    public bool candyTaken = false;
     void Start()
     {
         instance = this;
@@ -43,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         ghosts++;
         ghostsLeft--;
+        score = score + 100;
         UpdateUI();
     }
     public void LoseHealth()
