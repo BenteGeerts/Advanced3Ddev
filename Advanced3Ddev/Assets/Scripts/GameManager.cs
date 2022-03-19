@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     int score = 0;
     int ghosts = 0;
     int health = 100;
+    int ghostsLeft = 3;
     [SerializeField] TextMeshProUGUI scoreUI;
     [SerializeField] TextMeshProUGUI ghostsUI;
     [SerializeField] TextMeshProUGUI healthUI;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     public void AddGhost()
     {
         ghosts++;
+        ghostsLeft--;
         UpdateUI();
     }
     public void LoseHealth()
@@ -68,5 +70,9 @@ public class GameManager : MonoBehaviour
     public int Health
     {
         get { return health; }
+    }
+    public int GhostsLeft
+    {
+        get { return ghostsLeft; }
     }
 }

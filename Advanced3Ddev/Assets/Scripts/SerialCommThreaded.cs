@@ -45,14 +45,18 @@ public class SerialCommThreaded : MonoBehaviour
         {
             databyteRead = false; //to see if a next databyte is received
             Debug.Log((char)databyte_in);
+            if((char)databyte_in == 'V')
+            {
+                Debug.Log("Walking forward");
+            }
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (GameManager.GetInstance().one)
         {
             databyte_out = 0; //index in txChars
             databyteWrite = true;
 
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        if (!GameManager.GetInstance().one)
         {
             databyte_out = 1; //index in txChars
             databyteWrite = true;
