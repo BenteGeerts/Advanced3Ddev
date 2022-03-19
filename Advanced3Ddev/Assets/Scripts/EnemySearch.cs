@@ -24,6 +24,7 @@ public class EnemySearch : MonoBehaviour
             Vector3 newDirection = seekTarget.position - transform.position;
             newDirection = new Vector3(newDirection.x + stoppingDistance, 0, newDirection.z);
             newDirection = newDirection.normalized;
+            transform.LookAt(seekTarget);
             direction = newDirection;
             transform.position += speed * direction * Time.deltaTime;
         }
