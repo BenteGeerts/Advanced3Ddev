@@ -65,6 +65,12 @@ public class GameManager : MonoBehaviour
        
     }
 
+    public void AddHealth()
+    {
+        health = health + 50;
+        UpdateUI();
+    }
+
     public int Score
     {
         get { return score; }
