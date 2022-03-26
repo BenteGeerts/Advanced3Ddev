@@ -14,26 +14,27 @@ public class GameManager : MonoBehaviour
     int health = 100;
     int ghostsLeft = 3;
     [SerializeField] TextMeshProUGUI scoreUI;
-    [SerializeField] TextMeshProUGUI ghostsUI;
-    [SerializeField] TextMeshProUGUI healthUI;
     [SerializeField] TextMeshProUGUI ghostsLeftUI;
     [SerializeField] TextMeshProUGUI highScoreUI;
+    public HealthBar healtBar;
     public bool candyTaken = false;
+    public bool slow;
+    public bool fast;
+    public bool spawn = false;
     void Start()
     {
         instance = this;
+        healtBar = healtBar.GetComponent<HealthBar>();
         score = 0;
         ghosts = 0;
         ghostsLeft = 3;
-        healthUI.text = 100.ToString();
+        healtBar.SetMaxHealth(health);
         UpdateUI();
     }
-    // Update is called once per frame
-    void UpdateUI()
+    public void UpdateUI()
     {
         scoreUI.text = "Score: " + score;
-        ghostsUI.text = "Ghosts killed: " + ghosts;
-        healthUI.text = health.ToString();
+        healtBar.SetHealth(health);
         ghostsLeftUI.text = "Ghosts left: " + ghostsLeft;
         highScoreUI.text = "Highscore: " + PlayerPrefs.GetInt("highScore").ToString();
     }
@@ -65,6 +66,16 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
        
+    }
+
+    public void AddHealth()
+    {
+        health = health + 50;
+        if(health > 100)
+        {
+            health = 100;
+        }
+        UpdateUI();
     }
 
     public int Score
