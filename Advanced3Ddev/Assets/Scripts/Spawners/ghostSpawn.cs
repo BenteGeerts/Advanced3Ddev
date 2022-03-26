@@ -14,12 +14,14 @@ public class ghostSpawn : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.GetInstance().GhostsLeft == 2)
+        if(GameManager.GetInstance().GhostsLeft == 2 || GameManager.GetInstance().spawn)
         {
             Instantiate(blue, transform.position, Quaternion.identity);
             Instantiate(pink, transform.position, Quaternion.identity);
             Instantiate(yellow, transform.position, Quaternion.identity);
             GameManager.GetInstance().GhostsLeft += 3;
+            GameManager.GetInstance().UpdateUI();
+            GameManager.GetInstance().spawn = false;    
         }
     }
 }

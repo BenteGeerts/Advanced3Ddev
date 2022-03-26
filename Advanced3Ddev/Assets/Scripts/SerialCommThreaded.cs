@@ -25,7 +25,7 @@ public class SerialCommThreaded : MonoBehaviour
     static private int databyte_out; //index in txChars array of possible characters to send
     static private bool databyteWrite = false; //to let the serial com thread know there is a byte to send
     //txChars contains the characters to send: we have to use the index
-    private char[] txChars = { 'A', 'U' };
+    private char[] txChars = { 'A', 'U', 'B', 'O'};
 
     //threadrelated
     private bool stopSerialThread = false; //to stop the thread
@@ -45,27 +45,41 @@ public class SerialCommThreaded : MonoBehaviour
         {
             databyteRead = false; //to see if a next databyte is received
             Debug.Log((char)databyte_in);
-            if((char)databyte_in == 'L')
+            if ((char)databyte_in == 'L')
             {
-                GameManager.GetInstance().candyTaken = true;
+                GameManager.GetInstance().AddHealth();
             }
 
             if ((char)databyte_in == 'R')
             {
-                GameManager.GetInstance().AddPoint();
+                GameManager.GetInstance().spawn = true;
             }
-        }
-        if (GameManager.GetInstance().candyTaken)
-        {
-            databyte_out = 0; //index in txChars
-            databyteWrite = true;
 
         }
-        if (GameManager.GetInstance().Health >= 10)
+        else
         {
-            databyte_out = 1; //index in txChars
-            databyteWrite = true;
+            if (GameManager.GetInstance().fast)
+            {
+                databyte_out = 0; //index in txChars
+                databyteWrite = true;
+            }
+            if (!GameManager.GetInstance().fast)
+            {
+                databyte_out = 1; //index in txChars
+                databyteWrite = true;
+            }
+            if (GameManager.GetInstance().slow)
+            {
+                databyte_out = 2; //index in txChars
+                databyteWrite = true;
+            }
+            if (!GameManager.GetInstance().slow)
+            {
+                databyte_out = 3; //index in txChars
+                databyteWrite = true;
+            }
         }
+        
     }
 
 
@@ -80,12 +94,24 @@ public class SerialCommThreaded : MonoBehaviour
                     if (databyte_out == 0)
                     {
                         sp.Write(txChars, 0, 1); //tx 'A'
+                        databyteWrite = false;
                     }
-                    if (databyte_out == 1)
+                    else if (databyte_out == 1)
                     {
                         sp.Write(txChars, 1, 1); //tx 'U'
+                        databyteWrite = false;
                     }
-                    databyteWrite = false; //to be able to send again
+                    else if(databyte_out == 2)
+                    {
+                        sp.Write(txChars, 2, 1);
+                        databyteWrite = false;
+                    }
+                    else if(databyte_out == 3)
+                    {
+                        sp.Write(txChars, 3, 1);
+                        databyteWrite = false;
+                    }
+                     //to be able to send again
                 }
                 try //trying something to receive takes 20 ms = sp.ReadTimeout
                 {

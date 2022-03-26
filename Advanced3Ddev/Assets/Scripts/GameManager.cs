@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI highScoreUI;
     public HealthBar healtBar;
     public bool candyTaken = false;
+    public bool slow;
+    public bool fast;
+    public bool spawn = false;
     void Start()
     {
         instance = this;
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
         healtBar.SetMaxHealth(health);
         UpdateUI();
     }
-    void UpdateUI()
+    public void UpdateUI()
     {
         scoreUI.text = "Score: " + score;
         healtBar.SetHealth(health);

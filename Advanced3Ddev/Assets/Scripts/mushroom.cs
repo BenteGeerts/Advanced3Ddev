@@ -19,8 +19,10 @@ public class mushroom : MonoBehaviour
         Time.timeScale = 2f;
         time = time - Time.deltaTime;
         Debug.Log(time);
+        GameManager.GetInstance().fast = true;
         if (time < 0f)
         {
+            GameManager.GetInstance().fast = false;
             Time.timeScale = 1f;
             entered = false;
             time = 10f;
