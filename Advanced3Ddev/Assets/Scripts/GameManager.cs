@@ -14,24 +14,24 @@ public class GameManager : MonoBehaviour
     int health = 100;
     int ghostsLeft = 3;
     [SerializeField] TextMeshProUGUI scoreUI;
-    [SerializeField] TextMeshProUGUI healthUI;
     [SerializeField] TextMeshProUGUI ghostsLeftUI;
     [SerializeField] TextMeshProUGUI highScoreUI;
+    public HealthBar healtBar;
     public bool candyTaken = false;
     void Start()
     {
         instance = this;
+        healtBar = healtBar.GetComponent<HealthBar>();
         score = 0;
         ghosts = 0;
         ghostsLeft = 3;
-        healthUI.text = 100.ToString();
+        healtBar.SetMaxHealth(health);
         UpdateUI();
     }
-    // Update is called once per frame
     void UpdateUI()
     {
         scoreUI.text = "Score: " + score;
-        healthUI.text = health.ToString();
+        healtBar.SetHealth(health);
         ghostsLeftUI.text = "Ghosts left: " + ghostsLeft;
         highScoreUI.text = "Highscore: " + PlayerPrefs.GetInt("highScore").ToString();
     }
