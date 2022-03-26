@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class randomlySpawnCandy : MonoBehaviour
+public class mushroomSpawner : MonoBehaviour
 {
-    public GameObject candy;
+    public GameObject mushroom;
     int xPos;
     int enemyCount;
     int zPos;
@@ -12,16 +12,17 @@ public class randomlySpawnCandy : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(CoinDrop());
+        StartCoroutine(MushroomDrop());
     }
 
-    IEnumerator CoinDrop()
+
+    IEnumerator MushroomDrop()
     {
         while (enemyCount < 10)
         {
             xPos = Random.Range(216, 481);
             zPos = Random.Range(-56, 18);
-            Instantiate(candy, new Vector3(xPos, -2.4f, zPos), Quaternion.identity);
+            Instantiate(mushroom, new Vector3(xPos, -2.4f, zPos), Quaternion.identity);
             yield return null;
             enemyCount++;
         }
