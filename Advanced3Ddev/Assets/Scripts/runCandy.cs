@@ -18,15 +18,13 @@ public class runCandy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.GetInstance().one = true;
-        GameManager.GetInstance().two = true;
-        GameManager.GetInstance().three = true;
+        GameManager.GetInstance().candyTaken = true;
+       
 
     }
     private void OnTriggerExit(Collider other)
     {
-        GameManager.GetInstance().one = false;
-        GameManager.GetInstance().two = false;
-        GameManager.GetInstance().three = false;
+        GameManager.GetInstance().candyTaken = false;
+        Destroy(gameObject);
     }
 }

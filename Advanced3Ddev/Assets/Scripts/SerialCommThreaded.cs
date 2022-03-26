@@ -50,13 +50,13 @@ public class SerialCommThreaded : MonoBehaviour
                 Debug.Log("Walking forward");
             }
         }
-        if (GameManager.GetInstance().one)
+        if (GameManager.GetInstance().candyTaken)
         {
             databyte_out = 0; //index in txChars
             databyteWrite = true;
 
         }
-        if (!GameManager.GetInstance().one)
+        if (!GameManager.GetInstance().candyTaken)
         {
             databyte_out = 1; //index in txChars
             databyteWrite = true;
