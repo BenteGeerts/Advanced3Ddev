@@ -17,7 +17,7 @@ public class randomlySpawnCandy : MonoBehaviour
 
     IEnumerator CoinDrop()
     {
-        while (enemyCount < 7)
+        while (enemyCount < 10)
         {
             xPos = Random.Range(216, 481);
             zPos = Random.Range(-56, 18);
