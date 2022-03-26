@@ -56,30 +56,23 @@ public class SerialCommThreaded : MonoBehaviour
             }
 
         }
-        else
+        if (GameManager.GetInstance().fast)
         {
-            if (GameManager.GetInstance().fast)
-            {
-                databyte_out = 0; //index in txChars
-                databyteWrite = true;
-            }
-            if (!GameManager.GetInstance().fast)
-            {
-                databyte_out = 1; //index in txChars
-                databyteWrite = true;
-            }
-            if (GameManager.GetInstance().slow)
-            {
-                databyte_out = 2; //index in txChars
-                databyteWrite = true;
-            }
-            if (!GameManager.GetInstance().slow)
-            {
-                databyte_out = 3; //index in txChars
-                databyteWrite = true;
-            }
+            sp.Write("A");
         }
-        
+        if (!GameManager.GetInstance().fast)
+        {
+            sp.Write("U");
+        }
+        if (GameManager.GetInstance().slow)
+        {
+            sp.Write("B");
+        }
+        if (!GameManager.GetInstance().slow)
+        {
+            sp.Write("O");
+        }
+
     }
 
 
@@ -94,24 +87,20 @@ public class SerialCommThreaded : MonoBehaviour
                     if (databyte_out == 0)
                     {
                         sp.Write(txChars, 0, 1); //tx 'A'
-                        databyteWrite = false;
                     }
-                    else if (databyte_out == 1)
+                    if (databyte_out == 1)
                     {
                         sp.Write(txChars, 1, 1); //tx 'U'
-                        databyteWrite = false;
                     }
-                    else if(databyte_out == 2)
+                    if(databyte_out == 2)
                     {
                         sp.Write(txChars, 2, 1);
-                        databyteWrite = false;
                     }
-                    else if(databyte_out == 3)
+                    if(databyte_out == 3)
                     {
                         sp.Write(txChars, 3, 1);
-                        databyteWrite = false;
                     }
-                     //to be able to send again
+                    databyteWrite = false;//to be able to send again
                 }
                 try //trying something to receive takes 20 ms = sp.ReadTimeout
                 {

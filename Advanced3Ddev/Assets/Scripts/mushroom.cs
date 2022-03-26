@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class mushroom : MonoBehaviour
 {
-    bool entered = false;
+    public bool entered = false;
     float time = 10f;
     void Update()
     {
