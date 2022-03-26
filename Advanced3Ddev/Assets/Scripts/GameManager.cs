@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     int health = 100;
     int ghostsLeft = 3;
     [SerializeField] TextMeshProUGUI scoreUI;
-    [SerializeField] TextMeshProUGUI ghostsUI;
     [SerializeField] TextMeshProUGUI healthUI;
     [SerializeField] TextMeshProUGUI ghostsLeftUI;
     [SerializeField] TextMeshProUGUI highScoreUI;
@@ -32,7 +31,6 @@ public class GameManager : MonoBehaviour
     void UpdateUI()
     {
         scoreUI.text = "Score: " + score;
-        ghostsUI.text = "Ghosts killed: " + ghosts;
         healthUI.text = health.ToString();
         ghostsLeftUI.text = "Ghosts left: " + ghostsLeft;
         highScoreUI.text = "Highscore: " + PlayerPrefs.GetInt("highScore").ToString();
