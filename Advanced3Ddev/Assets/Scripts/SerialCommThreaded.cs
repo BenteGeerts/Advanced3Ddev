@@ -45,9 +45,14 @@ public class SerialCommThreaded : MonoBehaviour
         {
             databyteRead = false; //to see if a next databyte is received
             Debug.Log((char)databyte_in);
-            if((char)databyte_in == 'V')
+            if((char)databyte_in == 'L')
             {
-                Debug.Log("Walking forward");
+                GameManager.GetInstance().candyTaken = true;
+            }
+
+            if ((char)databyte_in == 'R')
+            {
+                GameManager.GetInstance().AddPoint();
             }
         }
         if (GameManager.GetInstance().candyTaken)
@@ -56,7 +61,7 @@ public class SerialCommThreaded : MonoBehaviour
             databyteWrite = true;
 
         }
-        if (!GameManager.GetInstance().candyTaken)
+        if (GameManager.GetInstance().Health >= 10)
         {
             databyte_out = 1; //index in txChars
             databyteWrite = true;
