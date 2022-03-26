@@ -2,26 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PizzaScript : MonoBehaviour
+public class mushroom : MonoBehaviour
 {
     bool entered = false;
     float time = 10f;
     void Update()
     {
-        if(entered)
+        if (entered)
         {
-            Slow();
+            Fast();
         }
     }
 
-    void Slow()
+    void Fast()
     {
-        Time.timeScale = 0.5f;
+        Time.timeScale = 2f;
         time = time - Time.deltaTime;
         Debug.Log(time);
         if (time < 0f)
         {
-            GameManager.GetInstance().LoseHealth();
             Time.timeScale = 1f;
             entered = false;
             time = 10f;
