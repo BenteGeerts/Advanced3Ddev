@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene(0);
         }
        
